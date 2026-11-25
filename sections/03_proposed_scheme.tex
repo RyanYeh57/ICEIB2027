@@ -1,0 +1,36 @@
+\section{Proposed System}\label{sec:scheme}
+\subsection{Architecture}
+The application is organized around a request from a resident and the data needed to answer it. Table~\ref{tab:components} summarizes the responsibilities. The project selected an Android client using Jetpack Compose and MapLibre, a Python/FastAPI backend, and PostgreSQL/PostGIS for persistence and spatial operations. Valhalla with OpenStreetMap pedestrian data is the selected walking-route approach; Claude API is the selected language-model service. Integration remains work in progress.
+
+\begin{table}[htbp]
+\caption{Responsibilities in the Proposed Workflow}
+\label{tab:components}
+\centering\footnotesize
+\begin{tabular}{@{}p{0.27\columnwidth}p{0.65\columnwidth}@{}}
+\toprule Component & Responsibility \\
+\midrule
+Data ingestion & Import and validate schedules and vehicle observations. \\
+Spatial services & Locate candidate stops and estimate pedestrian routes. \\
+Arrival estimation & Use available schedules, history, and vehicle data to estimate arrival. \\
+Recommendation & Check service rules, compare time margins, and identify alternatives. \\
+User interface and agent & Receive requests and present results, sources, and limitations. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The data layer retains the time reported by a vehicle and the time the system collected the record. The distinction matters because a recently downloaded snapshot can contain an old vehicle position. Address-based collection locations require geocoding before they can be used in a route calculation. The agent communicates with the supporting services and describes their outputs; numerical estimates originate in those services.
+
+\subsection{Time Margin}
+For each stop $s$ and a common query time, the proposed decision uses
+\begin{equation}
+M(s)=A(s)-W(s)-B(s),
+\label{eq:margin}
+\end{equation}
+where $A(s)$ is the estimated number of minutes until the truck reaches $s$, $W(s)$ is the estimated walking time, and $B(s)$ is a safety buffer. The development plan uses a three-minute initial buffer and the earliest estimated arrival. A nonnegative margin indicates the candidate satisfies this initial rule under its assumptions. Arrival and walking estimates may still be inaccurate.
+
+For example, if arrival is estimated in 15 minutes and the walk takes 8 minutes, a 3-minute buffer leaves a margin of 4 minutes. A second point with a 7-minute arrival estimate and a 5-minute walk has a margin of $-1$ minute. This example shows why the closest stop is not necessarily the most practical destination.
+
+\subsection{Processing a Request}
+The workflow begins with an authorized position and the user's request. It checks the applicable collection day and type, searches for candidate points, and obtains the available schedule and vehicle data. For each candidate, the GIS and arrival components provide time estimates and the recommendation component applies \eqref{eq:margin}. The system then presents feasible candidates along with their walking time, time source, data age, and available alternatives.
+
+The initial scope recommends general-waste collection. On public holidays, for which the selected dataset may not contain the applicable special schedule, the project plan directs users to official information \cite{tcepb_holiday}. Stale or missing live data can lead to a clearly labeled schedule-based estimate. A stop lacking adequate location or time information is marked uncertain; if no candidate can be supported, the interface explains the limitation.

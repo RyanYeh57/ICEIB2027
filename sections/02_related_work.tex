@@ -1,0 +1,15 @@
+\section{Related Work}\label{sec:related}
+\subsection{Predicting Vehicle Arrival}
+Chen \textit{et al.} studied prediction of waste-vehicle travel times using historical journeys in Hsinchu \cite{chen2019travel}. They combined clustering and regression to estimate travel time, providing a useful reference for a Taiwanese waste-collection setting. Their system supports selection of nearby points and arrival-time lookup. Applying a similar method in Taichung would first require enough reliable observations and a way to associate trips with collection points.
+
+Bus prediction provides additional approaches to time-dependent travel. Zhang \textit{et al.} used a long short-term memory model and an optimization procedure for a bus route \cite{zhang2024bus}. Rawat \textit{et al.} studied route-aware prediction across New York bus routes and compared it with historical averages \cite{rawat2026bus}. These studies suggest model and baseline choices, but buses and waste vehicles have different stopping patterns. Their reported accuracy should therefore be interpreted in their own data settings.
+
+\subsection{Pedestrian Routing}
+The route a person can walk depends on network connectivity and intersections, not just the distance between two map coordinates. Al Shammas \textit{et al.} considered pedestrian infrastructure and comfort in GIS routing \cite{alshammas2023gis}. Fink \textit{et al.} constructed a travel-time matrix that accounts for different walking speeds \cite{fink2024travel}. GarbageGo uses these ideas to motivate network-based walking estimates and explicit assumptions about user speed. The completeness of local pedestrian data remains an implementation concern.
+
+\subsection{Tool-Assisted Language Models}
+Toolformer investigates learning to call external tools \cite{schick2023toolformer}; ReAct studies sequences of model actions and observations \cite{yao2023react}. LLMAP separates language-based interpretation from algorithmic route search \cite{yuan2025llmap}. In the proposed GarbageGo workflow, the language model interprets and explains requests, while specialized services provide the numbers used in a recommendation. This division makes it possible to present the source and timestamp of calculated values.
+
+\subsection{Comparison and Project Scope}
+The reviewed approaches address different parts of the problem. Table~\ref{tab:comparison} relates their emphasis to the proposed project. GarbageGo's contribution as a course design is to combine these capabilities around a resident's immediate decision, using available data and clearly identifying limitations.
+\input{tables/comparison}

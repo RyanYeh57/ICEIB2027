@@ -1,82 +1,78 @@
-
+% =====================================================================
+%  ICEIB 2027 — IEEE Conference Paper (IEEEtran, conference mode)
+%  GarbageGo: time-feasibility recommendation of garbage collection points
+%  Full paper length: 4–8 pages
+%
+%  Build: latexmk -pdf main.tex
+%     or: pdflatex main -> bibtex main -> pdflatex main -> pdflatex main
+% =====================================================================
 \documentclass[conference]{IEEEtran}
+% \IEEEoverridecommandlockouts  % uncomment if you need \thanks in the author block
 
-% ==========================================
-% Packages
-% ==========================================
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
 \usepackage{url}
 
 \graphicspath{{figures/}}
 
 \begin{document}
 
-% ==========================================
+% ---------------------------------------------------------------------
 % Title
-% ==========================================
-\title{Your Research Paper Title}
+% ---------------------------------------------------------------------
+\title{GarbageGo: A Time-Aware Guide to Waste Collection Points in Taichung}
 
-% ==========================================
+% ---------------------------------------------------------------------
 % Authors
-% ==========================================
+% TODO: fill in romanized names and affiliations.
+% Team order follows the proposal: 葉文賢, 李安爵, 邱勇嘉, 李易軒;
+% instructor: 陳煥 (add as an author or in the Acknowledgment).
+% ---------------------------------------------------------------------
 \author{
-    \IEEEauthorblockN{
-        First Author and Second Author
-    }
-    \IEEEauthorblockA{
-        Department of Computer Science and Engineering\\
-        National Chung Hsing University\\
-        Taichung, Taiwan\\
-        Email: author@example.com
-    }
+\IEEEauthorblockN{[Author 1]}
+\IEEEauthorblockA{\textit{[Department]} \\
+\textit{[University]}\\
+Taichung, Taiwan \\
+email@address.com}
+\and
+\IEEEauthorblockN{An-Jyue Lee}
+\IEEEauthorblockA{\textit{[Department]} \\
+\textit{[University]}\\
+Taichung, Taiwan \\
+email@address.com}
+\and
+\IEEEauthorblockN{[Author 3]}
+\IEEEauthorblockA{\textit{[Department]} \\
+\textit{[University]}\\
+Taichung, Taiwan \\
+email@address.com}
+\and
+\IEEEauthorblockN{[Author 4]}
+\IEEEauthorblockA{\textit{[Department]} \\
+\textit{[University]}\\
+Taichung, Taiwan \\
+email@address.com}
 }
 
 \maketitle
 
-% ==========================================
-% Abstract and Keywords
-% ==========================================
+% ---------------------------------------------------------------------
+% Body
+% ---------------------------------------------------------------------
 \input{sections/00_abstract}
-
-% ==========================================
-% I. Introduction
-% ==========================================
 \input{sections/01_introduction}
-
-% ==========================================
-% II. Related Work
-% ==========================================
 \input{sections/02_related_work}
-
-% ==========================================
-% III. Proposed Scheme
-% ==========================================
 \input{sections/03_proposed_scheme}
-
-% ==========================================
-% IV. Experiments and Discussion
-% ==========================================
 \input{sections/04_experiments}
-
-% ==========================================
-% V. Conclusion
-% ==========================================
 \input{sections/05_conclusion}
 
-% ==========================================
-% Acknowledgment (Optional)
-% ==========================================
-% \section*{Acknowledgment}
-
-% ==========================================
-% References
-% ==========================================
+% ---------------------------------------------------------------------
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 

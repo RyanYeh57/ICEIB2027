@@ -1,0 +1,32 @@
+\section{Data Analysis and Project Assessment}\label{sec:exp}
+\subsection{Available Sources and Collection}
+The vehicle feed contains vehicle identifiers, reported times, coordinates, route information, and speed \cite{dataset83558}. The API response provides the latest available position for each vehicle, so the project collected repeated snapshots to build a history. The collection-point dataset supplies addresses, schedules, and associated vehicle information \cite{dataset84004}. Its address records require spatial matching before they can support route calculations.
+
+The project's audit polled the vehicle feed every ten minutes from October 5 to November 3, 2026. Duplicate vehicle-and-time records were removed. Table~\ref{tab:observations} summarizes the findings recorded in the project documentation. The inferred feed interval is based on a limited observation and differs from the ten-minute update frequency listed on the dataset page.
+
+\begin{table}[htbp]
+\caption{Summary of the Project's Data Audit}
+\label{tab:observations}
+\centering\footnotesize
+\begin{tabular}{@{}p{0.63\columnwidth}r@{}}
+\toprule Measure & Observed value \\
+\midrule
+Saved snapshots over about 29 days & 4,100 \\
+Distinct vehicle-time observations & 980,775 \\
+Vehicles observed & 668 \\
+Inferred snapshot interval & about 5 min \\
+Positions older than 30 min in one snapshot & 118 of 663 \\
+Collection-point plates also observed in feed & 358 of 374 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Connecting and Locating Records}
+The overlap of 358 out of 374 vehicle identifiers suggests that plate numbers can help connect the datasets. It does not verify that an assigned vehicle currently serves every corresponding stop or reveal exact stop-by-stop progress. The feed's location text is not itself a collection-point identifier. A vehicle may also be stationary or inactive, so the age of a position must be interpreted in context.
+
+A separate trial matched 20,090 collection-point records against local address points. The first version matched 95.6\% of the records using exact and approximate address rules; a second version matched three more. Approximate matches can use a neighboring address number or omit descriptive suffixes. These percentages measure matching coverage, and the resulting coordinates had not yet been individually validated. Unmatched or uncertain records need further review before they can support confident walking directions.
+
+A later project import through November 19 recorded 1,710,839 distinct observations from 669 vehicles. Some reported timestamps were much older than the collection time. Retaining both times supports data-quality checks and helps distinguish a fresh download from a fresh observation.
+
+\subsection{Course Project Demonstration}
+A demonstration can compare a nearby point with little remaining time against a farther point with a larger margin. Additional scenarios include a stale vehicle position, an unavailable walking route, an unmatched address, and no candidate within the selected area. These scenarios test whether the interface displays the source of each time estimate and communicates uncertainty. Later quantitative comparison of ETA or recommendation accuracy would require reliable actual arrival and walking-time records. No such accuracy result is reported here.
